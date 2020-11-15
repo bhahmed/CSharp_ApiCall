@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DemoLibrary;
 
 namespace ApiConsumerDemo
 {
@@ -22,6 +23,14 @@ namespace ApiConsumerDemo
         public SunInfo()
         {
             InitializeComponent();
+        }
+
+        private async void LoadSunInfo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sunInfo = await SunProcessor.LaodSunInformation();
+
+            sunriseText.Text = $"Sunrise is at {sunInfo.Sunrise.ToLocalTime().ToShortTimeString()}";
+            sunsetText.Text = $"Sunset is at {sunInfo.Sunset.ToLocalTime().ToShortTimeString()}";
         }
     }
 }
